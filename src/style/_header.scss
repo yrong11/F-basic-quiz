@@ -1,0 +1,26 @@
+@import "variables";
+
+.header {
+  text-align: center;
+  border: none;
+  border-bottom: 3px solid $light-gray;
+  .avatar {
+    border-radius: 50%;
+    width: $image-size;
+    margin-top: -50px;
+  }
+}
+
+.introduction {
+  text-transform: uppercase;
+  h1 {
+    font-size: 30px;
+    margin-top: $base-margin;
+  }
+
+  p {
+    font-size: 20px;
+    font-weight: bold;
+    line-height: $line-height-base;
+  }
+}
