@@ -1,0 +1,22 @@
+@import "variables";
+
+.educations {
+  margin-top: 2 * $base-margin;
+}
+
+.education-info {
+  display: flex;
+  justify-content: space-between;
+
+  h3 {
+    margin: 0px;
+  }
+
+  .education-content {
+    width: 100%;
+    padding: $base-padding;
+    margin-bottom: $base-margin;
+    margin-left: 1.5 * $base-margin;
+    background-color: $light-gray;
+  }
+}

@@ -3,12 +3,13 @@
 @import "reboot";
 @import "header";
 @import "extends";
+@import "container";
 
 .main {
   margin: 80px auto $base-margin auto;
-  padding: 0 2 * $base-padding 2 * $base-padding 2 * $base-padding;
+  padding: 0 3 * $base-padding 2 * $base-padding 3 * $base-padding;
 
-  width: 70%;
+  width: 60%;
   background-color: $white;
 }
 

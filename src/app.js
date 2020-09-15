@@ -28,10 +28,38 @@ function renderAboutMe(userInfo) {
   descriptionDOM.innerHTML = description;
 }
 
+function renderEducation(educationInfo) {
+  const educations = document.getElementById("educations");
+  educationInfo.forEach((item) => {
+    const education = document.createElement("div");
+    education.setAttribute("class", "education-info");
+    const year = document.createElement("h3");
+    year.setAttribute("class", "education-year");
+    year.innerHTML = item.year;
+
+    const content = document.createElement("div");
+    content.setAttribute("class", "education-content");
+
+    const title = document.createElement("h3");
+    title.innerHTML = item.title;
+
+    const desc = document.createElement("p");
+    desc.innerHTML = item.description;
+
+    content.appendChild(title);
+    content.appendChild(desc);
+    education.appendChild(year);
+    education.appendChild(content);
+    educations.appendChild(education);
+    console.log(item);
+  });
+}
+
 async function render() {
-  const { userInfo } = await getData();
+  const { userInfo, educationInfo } = await getData();
   renderHeader(userInfo);
   renderAboutMe(userInfo);
+  renderEducation(educationInfo);
 }
 
 render();
