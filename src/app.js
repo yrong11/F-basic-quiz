@@ -6,11 +6,13 @@ const userInfoURL = localhost + urlPathName;
 const educationInfoURL = `${localhost}${urlPathName}/educations`;
 
 async function getData() {
-  const userInfo = await fetch(userInfoURL).then((resp) => resp.json());
-  const educationInfo = await fetch(educationInfoURL).then((resp) =>
-    resp.json()
-  );
-
+  let userInfo;
+  let educationInfo;
+  const userResp = await fetch(userInfoURL);
+  if (userResp.status === 200) {
+    userInfo = await userResp.json();
+    educationInfo = await fetch(educationInfoURL).then((resp) => resp.json());
+  }
   return { userInfo, educationInfo };
 }
 
@@ -30,36 +32,37 @@ function renderAboutMe(userInfo) {
 
 function renderEducation(educationInfo) {
   const educations = document.getElementById("educations");
-  educationInfo.forEach((item) => {
-    const education = document.createElement("div");
-    education.setAttribute("class", "education-info");
-    const year = document.createElement("h3");
-    year.setAttribute("class", "education-year");
-    year.innerHTML = item.year;
+  if (educationInfo instanceof Array)
+    educationInfo.forEach((item) => {
+      const education = document.createElement("div");
+      education.setAttribute("class", "education-info");
+      const year = document.createElement("h3");
+      year.setAttribute("class", "education-year");
+      year.innerHTML = item.year;
 
-    const content = document.createElement("div");
-    content.setAttribute("class", "education-content");
+      const content = document.createElement("div");
+      content.setAttribute("class", "education-content");
 
-    const title = document.createElement("h3");
-    title.innerHTML = item.title;
+      const title = document.createElement("h3");
+      title.innerHTML = item.title;
 
-    const desc = document.createElement("p");
-    desc.innerHTML = item.description;
+      const desc = document.createElement("p");
+      desc.innerHTML = item.description;
 
-    content.appendChild(title);
-    content.appendChild(desc);
-    education.appendChild(year);
-    education.appendChild(content);
-    educations.appendChild(education);
-    console.log(item);
-  });
+      content.appendChild(title);
+      content.appendChild(desc);
+      education.appendChild(year);
+      education.appendChild(content);
+      educations.appendChild(education);
+    });
 }
 
 async function render() {
   const { userInfo, educationInfo } = await getData();
-  renderHeader(userInfo);
-  renderAboutMe(userInfo);
-  renderEducation(educationInfo);
+  if (userInfo !== undefined) {
+    renderHeader(userInfo);
+    renderAboutMe(userInfo);
+    renderEducation(educationInfo);
+  }
 }
-
 render();
