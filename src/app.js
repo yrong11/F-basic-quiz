@@ -22,9 +22,16 @@ function renderHeader(userInfo) {
   avatarImg.src = avatar;
 }
 
+function renderAboutMe(userInfo) {
+  const { description } = userInfo;
+  const descriptionDOM = document.getElementById("description");
+  descriptionDOM.innerHTML = description;
+}
+
 async function render() {
   const { userInfo } = await getData();
   renderHeader(userInfo);
+  renderAboutMe(userInfo);
 }
 
 render();
