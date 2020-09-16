@@ -11,6 +11,7 @@ async function getData() {
   const userResp = await fetch(userInfoURL);
   if (userResp.status === 200) {
     userInfo = await userResp.json();
+    // TODO feedback: 两个请求没有依赖关系，可以单独存取
     educationInfo = await fetch(educationInfoURL).then((resp) => resp.json());
   }
   return { userInfo, educationInfo };
@@ -34,6 +35,7 @@ function renderEducation(educationInfo) {
   const educations = document.getElementById("educations");
   if (educationInfo instanceof Array)
     educationInfo.forEach((item) => {
+      // TODO feedback: 用ul li更符合语义
       const education = document.createElement("div");
       education.setAttribute("class", "education-info");
       const year = document.createElement("h3");
@@ -49,6 +51,7 @@ function renderEducation(educationInfo) {
       const desc = document.createElement("p");
       desc.innerHTML = item.description;
 
+      // TODO feedback: 可以通过添加html的方式，每次子元素都createElement过于复杂
       content.appendChild(title);
       content.appendChild(desc);
       education.appendChild(year);
@@ -59,6 +62,7 @@ function renderEducation(educationInfo) {
 
 async function render() {
   const { userInfo, educationInfo } = await getData();
+  // TODO feedback: userInfo不会是undefined
   if (userInfo !== undefined) {
     renderHeader(userInfo);
     renderAboutMe(userInfo);

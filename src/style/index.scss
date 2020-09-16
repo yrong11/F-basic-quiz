@@ -4,7 +4,7 @@
 @import "header";
 @import "extends";
 @import "container";
-
+// TODO feedback: 全局样式建议放在reboot.scss中
 .main {
   margin: 80px auto $base-margin auto;
   padding: 0 3 * $base-padding 2 * $base-padding 3 * $base-padding;
